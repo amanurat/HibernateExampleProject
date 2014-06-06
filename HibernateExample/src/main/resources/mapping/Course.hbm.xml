@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.training.hibernate.domain.Course" table="COURSE" catalog="hibernatedb">
+        <meta attribute="class-description">
+            This class contains course details.
+        </meta>
+        <id name="courseId" type="java.lang.Long" column="COURSE_ID">
+            <generator class="native"/>
+        </id>
+        <property name="courseName" type="java.lang.String" column="COURSE_NAME"/>
+    </class>
+
+    <query name="findCourseWithNameQueryById">
+        <![CDATA[from Course c where c.courseId = :ID]]>
+    </query>
+
+    <query name="findAllCourseWithNameQuery">
+        <![CDATA[from Course]]>
+    </query>
+
+    <sql-query name="findCourseWithNativeSQLById">
+        <return alias="course" class="com.training.hibernate.domain.Course"/>
+        <![CDATA[select * from course s where s.course_id = :ID]]>
+    </sql-query>
+
+
+
+</hibernate-mapping>

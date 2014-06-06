@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.hibernate.annotation.entity.Employee" table="employee" catalog="hibernatedb">
+        <meta attribute="class-description">
+            This class contains the employee detail.
+        </meta>
+
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="firstName" column="first_name" type="string"/>
+        <property name="lastName" column="last_name" type="string"/>
+        <property name="salary" column="salary" type="int"/>
+
+        <set name="accountList" table="ACCOUNT" cascade="all">
+            <key column="STUDENT_ID" />
+            <one-to-many class="com.hibernate.annotation.entity.Account" />
+        </set>
+    </class>
+</hibernate-mapping>
