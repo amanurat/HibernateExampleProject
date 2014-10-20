@@ -56,7 +56,7 @@ public class FirstExample {
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
-                long studentId = rs.getLong("STUDENT_ID");
+                Long studentId = rs.getLong("STUDENT_ID");
                 String studentName = rs.getString("STUDENT_NAME");
                 String email = rs.getString("EMAIL");
 
@@ -64,20 +64,15 @@ public class FirstExample {
                 studentEntity.setId(studentId);
                 studentEntity.setName(studentName);
                 studentEntity.setEmail(email);
-
                 studentEntitiesList.add(studentEntity);
-
-                //Display values
-//                System.out.print("STUDENT_ID: " + studentId);
-//                System.out.print(", studentName: " + studentName);
-//                System.out.print(", email: " + email);
             }
             //STEP 6: Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
 
-        } catch (SQLException se) {
+        }
+        catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
@@ -86,13 +81,11 @@ public class FirstExample {
         } finally {
             //finally block used to close resources
             try {
-                if (stmt != null)
-                    stmt.close();
+                if (stmt != null) stmt.close();
             } catch (SQLException se2) {
             }// nothing we can do
             try {
-                if (conn != null)
-                    conn.close();
+                if (conn != null) conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
             }//end finally try
