@@ -21,11 +21,9 @@ public class FirstExample {
 
     public static void main(String[] args) {
 
-
           insertStudent();
 
 //        listAllStudent();
-
 
         System.out.println("Goodbye!");
     }//end main
@@ -51,11 +49,8 @@ public class FirstExample {
             //STEP 4: Execute a query
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT STUDENT_ID, STUDENT_NAME, EMAIL FROM STUDENT";
+            String sql = "SELECT STUDENT_ID, STUDENT_NAME, EMAIL FROM STUDENT";
             ResultSet rs = stmt.executeQuery(sql);
-
-
 
             StudentEntity studentEntity;
             //STEP 5: Extract data from result set
