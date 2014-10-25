@@ -30,7 +30,6 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    @SuppressWarnings("unchecked")
     public void setSession(Session s) {
         this.session = s;
     }
@@ -51,7 +50,6 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
         return (T) getSession().get(persistentClass, id);
     }
 
-    @SuppressWarnings("unchecked")
     public T findById(ID id, boolean lock) {
         T entity;
         if (lock) {
@@ -63,12 +61,10 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
         return entity;
     }
 
-    @SuppressWarnings("unchecked")
     public List<T> findAll() {
         return findByCriteria();
     }
 
-    @SuppressWarnings("unchecked")
     public List<T> findByExample(T exampleInstance, String[] excludeProperty) {
         Criteria crit = getSession().createCriteria(getPersistentClass());
         Example example = Example.create(exampleInstance);
@@ -79,7 +75,6 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
         return crit.list();
     }
 
-    @SuppressWarnings("unchecked")
     public T makePersistent(T entity) {
         getSession().saveOrUpdate(entity);
         return entity;
@@ -100,13 +95,12 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
     /**
      * Use this inside subclasses as a convenience method.
      */
-    @SuppressWarnings("unchecked")
     protected List<T> findByCriteria(Criterion... criterion) {
-        Criteria crit = getSession().createCriteria(getPersistentClass());
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
         for (Criterion c : criterion) {
-            crit.add(c);
+            criteria.add(c);
         }
-        return crit.list();
+        return criteria.list();
     }
 
 }
