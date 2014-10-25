@@ -15,7 +15,7 @@ import java.util.List;
  * Date: 4/10/2014
  * Time: 2:56 PM
  */
-public class StudentEntityTest {
+public class StudentTest {
 
 
     @Before
@@ -36,7 +36,7 @@ public class StudentEntityTest {
 
         session.beginTransaction();
 
-        StudentEntity student = new StudentEntity("student3", "test3@email.com");
+        Student student = new Student("student3", "test3@email.com");
         session.save(student);
 
         session.getTransaction().commit();
@@ -47,7 +47,7 @@ public class StudentEntityTest {
     public void testGetStudent() throws Exception {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        StudentEntity student  = (StudentEntity) session.get(StudentEntity.class, 2L);
+        Student student  = (Student) session.get(Student.class, 2L);
 
         System.out.println("student : "+ student);
         System.out.println("name : " + student.getName());
@@ -60,9 +60,9 @@ public class StudentEntityTest {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
 
-        List<StudentEntity> studentEntityList = session.createCriteria(StudentEntity.class).list();
+        List<Student> studentList = session.createCriteria(Student.class).list();
 
-        System.out.println("Total of student : "+ studentEntityList);
+        System.out.println("Total of student : "+ studentList);
 
     }
 }

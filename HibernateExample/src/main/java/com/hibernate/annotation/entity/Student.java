@@ -11,7 +11,7 @@ import java.util.Set;
  * Date: 4/7/2014
  * Time: 3:32 PM
  */
-public class StudentEntity {
+public class Student {
 
     private Long id;
 
@@ -19,25 +19,16 @@ public class StudentEntity {
 
     private String email;
 
-    public StudentEntity() {
+    public Student() {
     }
     
-    public StudentEntity(String name) {
+    public Student(String name) {
         this.name = name;
     }
 
-    public StudentEntity(String name, String email) {
+    public Student(String name, String email) {
         this.name = name;
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("email", email)
-                .toString();
     }
 
     public String getEmail() {
@@ -63,5 +54,15 @@ public class StudentEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("email", email)
+                .toString();
+    }
+
 }
 

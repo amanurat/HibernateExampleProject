@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.hibernate.annotation.entity.StudentEntity" table="STUDENT">
+    <class name="com.hibernate.annotation.entity.Student" table="STUDENT">
         <meta attribute="class-description">This class contains student details.</meta>
         <id name="id" type="long" column="STUDENT_ID">
             <generator class="native" />

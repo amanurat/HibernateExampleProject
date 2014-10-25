@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstExample {
+public class JDBCExample {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/xxx";
@@ -36,7 +36,7 @@ public class FirstExample {
         Connection conn = null;
         Statement stmt = null;
 
-        List<StudentEntity> studentEntitiesList = new ArrayList<StudentEntity>();
+        List<Student> studentEntitiesList = new ArrayList<Student>();
 
         try {
             //STEP 2: Register JDBC driver
@@ -52,7 +52,7 @@ public class FirstExample {
             String sql = "SELECT STUDENT_ID, STUDENT_NAME, EMAIL FROM STUDENT";
             ResultSet rs = stmt.executeQuery(sql);
 
-            StudentEntity studentEntity;
+            Student student;
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
@@ -60,11 +60,11 @@ public class FirstExample {
                 String studentName = rs.getString("STUDENT_NAME");
                 String email = rs.getString("EMAIL");
 
-                studentEntity = new StudentEntity();
-                studentEntity.setId(studentId);
-                studentEntity.setName(studentName);
-                studentEntity.setEmail(email);
-                studentEntitiesList.add(studentEntity);
+                student = new Student();
+                student.setId(studentId);
+                student.setName(studentName);
+                student.setEmail(email);
+                studentEntitiesList.add(student);
             }
             //STEP 6: Clean-up environment
             rs.close();
