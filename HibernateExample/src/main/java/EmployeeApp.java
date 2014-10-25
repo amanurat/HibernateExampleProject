@@ -27,19 +27,18 @@ public class EmployeeApp {
 
     public EmployeeApp() {
         Configuration configure = new Configuration().configure();
-        sessionFactory =
-                configure.addAnnotatedClass(Employee.class)
+        sessionFactory = configure.addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Department.class)
                 .setInterceptor(new PrePersistIntercepter())
                 .buildSessionFactory();
 
-        new SchemaExport(configure).create(true, true);
+//        new SchemaExport(configure).create(true, true);
     }
 
     public static void main(String args[]) throws Exception {
         EmployeeApp app = new EmployeeApp();
         app.insert();
-//        app.update(1);
+        app.update(1);
 //        app.delete(1);
 //        app.getByPk();
 //        app.queryWithCriteria();
@@ -72,8 +71,7 @@ public class EmployeeApp {
     private void queryWithNameQuery() {
         Session session = sessionFactory.openSession();
 
-        List<Employee> employeeList = session.getNamedQuery("employee.findAll")
-                .list();
+        List<Employee> employeeList = session.getNamedQuery("employee.findAll").list();
 
         display(employeeList);
 
@@ -128,7 +126,7 @@ public class EmployeeApp {
         Employee john = new Employee("John", "Sutton", 200000, 20, "08912345678", 0, "Director", new Date(),"john@gmail.com", "USA");
         john.setDepartment(new Department("IT"));
 
-        Employee damian = new Employee("Damian", "Sutton", 100000, 20, "08187654321", 0, "Manager", new Date(),"damian@gmail.com", "Bangkok");
+        Employee damian = new Employee("Sara", "Sutton", 100000, 20, "08187654321", 0, "Manager", new Date(),"sara@gmail.com", "Bangkok");
         damian.setDepartment(new Department("HR"));
 
         session.save(john);
