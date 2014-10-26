@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import com.hibernate.annotation.util.HibernateUtil;
+import com.hibernate.annotation.util.HibernateUtils;
 import org.hibernate.Criteria;
 import org.hibernate.LockOptions;
 import org.hibernate.Session;
@@ -30,16 +32,19 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public void setSession(Session s) {
-        this.session = s;
+    protected GenericHibernateDAO(Class<T> persistentClass) {
+        super();
+        this.persistentClass = persistentClass;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     protected Session getSession() {
-        if (session == null) {
-            throw new IllegalStateException("Session has not been set on DAO before usage");
-        }
-        return session;
+        return HibernateUtil.getSession();
     }
+
 
     public Class<T> getPersistentClass() {
         return persistentClass;
@@ -66,13 +71,13 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
     }
 
     public List<T> findByExample(T exampleInstance, String[] excludeProperty) {
-        Criteria crit = getSession().createCriteria(getPersistentClass());
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
         Example example = Example.create(exampleInstance);
         for (String exclude : excludeProperty) {
             example.excludeProperty(exclude);
         }
-        crit.add(example);
-        return crit.list();
+        criteria.add(example);
+        return criteria.list();
     }
 
     public T makePersistent(T entity) {
